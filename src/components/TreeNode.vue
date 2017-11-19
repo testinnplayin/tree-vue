@@ -1,7 +1,7 @@
 <!-- What will be the recursively-created nodes of tree  -->
 <template lang="html">
-  <div>
-    <ul class="tree-node" :node-id="node.id" :rid="node.rid">
+  <div class="node" @dragenter.stop="onDragEnter" @dragstart.stop="handleDragStart" :node-id="node.id" :rid="node.rid">
+    <ul class="tree-node">
       <!-- if triangle is clicked on and node is collapsed  -->
       <li v-if="!node.expanded" :li-node-id="node.id" :li-rid="node.rid">
         <button v-if="node.children.length > 0" @click="clickOnExpand" class="list-btn"><icon name="caret-right"></icon></button>
@@ -38,6 +38,25 @@ export default {
     },
     dbClickOnLink: function () {
       console.log('double click triggered')
+    },
+    handleDragStart: function (e) {
+      // console.log('drag start')
+      // event's current target is always the div called node hence why it should be chosen for passing data
+      // console.log(e.target, e.currentTarget)
+      const rid = e.currentTarget.getAttribute('rid')
+      const nodeId = e.currentTarget.getAttribute('node-id')
+      // console.log('rid ', rid, 'id ', nodeId)
+      e.dataTransfer.setData('dropped-id', nodeId)
+      e.dataTransfer.setData('instance-id', rid)
+      // console.log(e)
+    },
+    onDragEnter: function (e) {
+      console.log('drag enter')
+      // event's current target is always the div called node
+      console.log(e.target, e.currentTarget)
+      console.log(e.currentTarget.getAttribute('node-id'))
+      console.log(this.node.label, this.node.expanded)
+      this.node.expanded = !this.node.expanded
     }
   },
   props: ['node', 'nind']
