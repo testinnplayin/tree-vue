@@ -13,6 +13,7 @@ const model = [
     label: 'Model',
     expanded: true,
     icon: null,
+    parent: true,
     rid: null,
     children: [
       {

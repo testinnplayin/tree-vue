@@ -1,16 +1,16 @@
 <!-- What will be the recursively-created nodes of tree  -->
 <template lang="html">
   <div>
-    <ul class="tree-node">
+    <ul class="tree-node" :node-id="node.id" :rid="node.rid">
       <!-- if triangle is clicked on and node is collapsed  -->
-      <li v-if="!node.expanded">
+      <li v-if="!node.expanded" :li-node-id="node.id" :li-rid="node.rid">
         <button v-if="node.children.length > 0" @click="clickOnExpand" class="list-btn"><icon name="caret-right"></icon></button>
         <a v-if="node.icon" @click.stop="clickOnLink" @dblclick.prevent.stop="dbClickOnLink" href="#">{{node.label}}</a>
         <label v-else>{{node.label}}</label>
         <button v-if="node.icon" class="list-btn"><icon :name="node.icon"></icon></button>
       </li>
       <!-- if triangle is clicked on and node is expanded  -->
-      <li v-else>
+      <li v-else :li-node-id="node.id" :li-rid="node.rid">
         <!-- show caret button if node has children  -->
         <button v-if="node.children.length > 0" @click="clickOnExpand" class="list-btn"><icon name="caret-down"></icon></button>
         <!-- show link instead of plain text if node has an icon (i.e. is an instance) this might be removed in case conflicts with double click  -->
@@ -19,7 +19,7 @@
         <!-- if there is an icon associated with node, then show icon  -->
         <button v-if="node.icon" class="list-btn"><icon :name="node.icon"></icon></button>
         <!-- where new children are rendered if there are any children, note that nind is node index  -->
-        <tree-node v-if="node.children.length > 0" v-for="(childNode, index) of node.children" :key="index" :nind="index" :node="childNode"></tree-node>
+        <tree-node v-if="node.children.length > 0" v-for="(childNode, index) of node.children" :key="index" :nind="index" :node="childNode" draggable></tree-node>
       </li>
     </ul>
   </div>
