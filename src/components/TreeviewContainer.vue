@@ -1,3 +1,4 @@
+<!-- My equivalent of LeftPanel.vue -->
 <template lang="html">
   <div id="treeview-container">
     <treeview :treeview="treeview"></treeview>
