@@ -1,19 +1,20 @@
 <!-- What will be the recursively-created node of tree  -->
 <template lang="html">
-  <ul class="tree-node">
-    <li v-if="!node.expanded">
-      <button @click="clickOnExpand" class="list-btn"><icon name="caret-right"></icon></button>
-      {{node.label}}
-      <button v-if="node.icon" class="list-btn"><icon :name="node.icon"></icon></button>
-    </li>
-    <li v-else>
-      <button @click="clickOnExpand" class="list-btn"><icon name="caret-down"></icon></button>
-      {{node.label}}
-      <button v-if="node.icon" class="list-btn"><icon :name="node.icon"></icon></button>
-      <tree-node v-if="node.children.length > 0" v-for="(childNode, index) of node.children" :key="index" :node="childNode"></tree-node>
-      <!-- <div v-else></div> -->
-    </li>
-  </ul>
+  <div>
+    <ul class="tree-node">
+      <li v-if="!node.expanded">
+        <button @click="clickOnExpand" class="list-btn"><icon name="caret-right"></icon></button>
+        {{node.label}}
+        <button v-if="node.icon" class="list-btn"><icon :name="node.icon"></icon></button>
+      </li>
+      <li v-else>
+        <button @click="clickOnExpand" class="list-btn"><icon name="caret-down"></icon></button>
+        {{node.label}}
+        <button v-if="node.icon" class="list-btn"><icon :name="node.icon"></icon></button>
+        <tree-node v-if="node.children.length > 0" v-for="(childNode, index) of node.children" :key="index" :node="childNode"></tree-node>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
