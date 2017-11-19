@@ -370,4 +370,11 @@ export default {
 </script>
 
 <style lang="css">
+  #treeview-container {
+    border-right: 1px solid #000;
+    float: left;
+    height: 100%;
+    min-height: 1000px;
+    width: 30%;
+  }
 </style>

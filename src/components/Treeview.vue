@@ -4,7 +4,7 @@
     <div class="search-stuff">Search Stuff</div>
     <div class="container">
       <!-- Where child nodes are injected -->
-      <tree-node></tree-node>
+      <tree-node v-for="(node, index) of treeview" :key="index" :node="node"></tree-node>
     </div>
   </div>
 </template>
@@ -19,4 +19,7 @@ export default {
 </script>
 
 <style lang="css">
+  .search-stuff {
+    border-bottom: 1px solid #000;
+  }
 </style>

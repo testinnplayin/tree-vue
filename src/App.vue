@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="nav"></div>
     <router-view/>
   </div>
 </template>
@@ -18,5 +19,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.nav {
+  border-bottom: 1px solid #000;
 }
 </style>
