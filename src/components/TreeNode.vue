@@ -5,7 +5,7 @@
       <!-- if triangle is clicked on and node is collapsed  -->
       <li v-if="!node.expanded">
         <button v-if="node.children.length > 0" @click="clickOnExpand" class="list-btn"><icon name="caret-right"></icon></button>
-        <a v-if="node.icon" href="#">{{node.label}}</a>
+        <a v-if="node.icon" @click.stop="clickOnLink" @dblclick.prevent.stop="dbClickOnLink" href="#">{{node.label}}</a>
         <label v-else>{{node.label}}</label>
         <button v-if="node.icon" class="list-btn"><icon :name="node.icon"></icon></button>
       </li>
@@ -14,7 +14,7 @@
         <!-- show caret button if node has children  -->
         <button v-if="node.children.length > 0" @click="clickOnExpand" class="list-btn"><icon name="caret-down"></icon></button>
         <!-- show link instead of plain text if node has an icon (i.e. is an instance) this might be removed in case conflicts with double click  -->
-        <a v-if="node.icon" href="#">{{node.label}}</a>
+        <a v-if="node.icon" @click.stop="clickOnLink" @dblclick.stop="dbClickOnLink" href="#">{{node.label}}</a>
         <label v-else>{{node.label}}</label>
         <!-- if there is an icon associated with node, then show icon  -->
         <button v-if="node.icon" class="list-btn"><icon :name="node.icon"></icon></button>
@@ -30,9 +30,14 @@ export default {
   name: 'TreeNode',
   methods: {
     clickOnExpand: function () {
-      console.log('expand click triggered')
       let expanded = this.node.expanded
       this.node.expanded = !this.node.expanded
+    },
+    clickOnLink: function () {
+      console.log('link click triggered')
+    },
+    dbClickOnLink: function () {
+      console.log('double click triggered')
     }
   },
   props: ['node', 'nind']
