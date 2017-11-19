@@ -4,7 +4,7 @@
     <div class="search-stuff">Search Stuff</div>
     <div class="container">
       <!-- Where child nodes are injected -->
-      <tree-node v-for="(node, index) of treeview" :key="index" :nind="index" :node="node"></tree-node>
+      <tree-node v-for="(node, index) of treeview" :key="index" :nind="index" :node="node" :treeview="treeview"></tree-node>
     </div>
   </div>
 </template>
@@ -14,7 +14,9 @@ import TreeNode from '@/components/TreeNode'
 export default {
   name: 'Treeview',
   components: {TreeNode},
-  props: ['treeview']
+  props: ['treeview'],
+  watch: {
+  }
 }
 </script>
 

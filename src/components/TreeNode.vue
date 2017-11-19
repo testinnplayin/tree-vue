@@ -1,6 +1,6 @@
 <!-- What will be the recursively-created nodes of tree  -->
 <template lang="html">
-  <div class="node" @dragenter.stop="onDragEnter" @dragstart.stop="handleDragStart" @dragleave.stop="onDragLeave" :node-id="node.id" :rid="node.rid">
+  <div class="node" @dragenter.stop="onDragEnter" @dragstart.stop="handleDragStart" @dragleave.stop="onDragLeave" @dragend.stop @dragover.prevent @drop.stop="onDrop" :node-id="node.id" :rid="node.rid">
     <ul class="tree-node">
       <!-- if triangle is clicked on and node is collapsed  -->
       <li v-if="!node.expanded" :li-node-id="node.id" :li-rid="node.rid">
@@ -51,20 +51,24 @@ export default {
       // console.log(e)
     },
     onDragEnter: function (e) {
-      // console.log('drag enter')
       // event's current target is always the div called node
-      // console.log(e.target, e.currentTarget)
-      // console.log(e.currentTarget.getAttribute('node-id'))
-      // console.log(this.node.label, this.node.expanded)
       if (!this.node.expanded) this.node.expanded = !this.node.expanded
       e.currentTarget.classList.add('highlighted')
     },
     onDragLeave: function (e) {
-      console.log('drag leave')
+      // console.log('drag leave')
       e.currentTarget.classList.remove('highlighted')
+    },
+    onDrop: function (e) {
+      console.log('dropped')
+      console.log(e)
+      // event's current target is always the div called node
+      console.log(e.target, e.currentTarget)
+      const droppedId = e.dataTransfer.getData('dropped-id')
+      console.log('droppedId ', droppedId)
     }
   },
-  props: ['node', 'nind']
+  props: ['node', 'nind', 'treeview']
 }
 </script>
 
