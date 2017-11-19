@@ -1,19 +1,25 @@
-<!-- What will be the recursively-created node of tree  -->
+<!-- What will be the recursively-created nodes of tree  -->
 <template lang="html">
   <div>
     <ul class="tree-node">
+      <!-- if triangle is clicked on and node is collapsed  -->
       <li v-if="!node.expanded">
-        <button @click="clickOnExpand" class="list-btn"><icon name="caret-right"></icon></button>
+        <button v-if="node.children.length > 0" @click="clickOnExpand" class="list-btn"><icon name="caret-right"></icon></button>
         <a v-if="node.icon" href="#">{{node.label}}</a>
         <label v-else>{{node.label}}</label>
         <button v-if="node.icon" class="list-btn"><icon :name="node.icon"></icon></button>
       </li>
+      <!-- if triangle is clicked on and node is expanded  -->
       <li v-else>
-        <button @click="clickOnExpand" class="list-btn"><icon name="caret-down"></icon></button>
+        <!-- show caret button if node has children  -->
+        <button v-if="node.children.length > 0" @click="clickOnExpand" class="list-btn"><icon name="caret-down"></icon></button>
+        <!-- show link instead of plain text if node has an icon (i.e. is an instance) this might be removed in case conflicts with double click  -->
         <a v-if="node.icon" href="#">{{node.label}}</a>
         <label v-else>{{node.label}}</label>
+        <!-- if there is an icon associated with node, then show icon  -->
         <button v-if="node.icon" class="list-btn"><icon :name="node.icon"></icon></button>
-        <tree-node v-if="node.children.length > 0" v-for="(childNode, index) of node.children" :key="index" :node="childNode"></tree-node>
+        <!-- where new children are rendered if there are any children, note that nind is node index  -->
+        <tree-node v-if="node.children.length > 0" v-for="(childNode, index) of node.children" :key="index" :nind="index" :node="childNode"></tree-node>
       </li>
     </ul>
   </div>
@@ -29,7 +35,7 @@ export default {
       this.node.expanded = !this.node.expanded
     }
   },
-  props: ['node']
+  props: ['node', 'nind']
 }
 </script>
 

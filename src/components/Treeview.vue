@@ -4,7 +4,7 @@
     <div class="search-stuff">Search Stuff</div>
     <div class="container">
       <!-- Where child nodes are injected -->
-      <tree-node v-for="(node, index) of treeview" :key="index" :node="node"></tree-node>
+      <tree-node v-for="(node, index) of treeview" :key="index" :nind="index" :node="node"></tree-node>
     </div>
   </div>
 </template>
