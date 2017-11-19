@@ -45,10 +45,11 @@ export default {
       // console.log(e.target, e.currentTarget)
       const rid = e.currentTarget.getAttribute('rid')
       const nodeId = e.currentTarget.getAttribute('node-id')
-      // console.log('rid ', rid, 'id ', nodeId)
+      const parentId = e.currentTarget.parentNode.getAttribute('li-node-id')
+      console.log('parentId ', parentId, 'id ', nodeId)
       e.dataTransfer.setData('dropped-id', nodeId)
-      e.dataTransfer.setData('instance-id', rid)
-      // console.log(e)
+      e.dataTransfer.setData('parent-id', parentId)
+      this.$store.commit('removeNode', {droppedId: droppedId, parentId: parentId})
     },
     onDragEnter: function (e) {
       // event's current target is always the div called node
@@ -65,7 +66,10 @@ export default {
       // event's current target is always the div called node
       console.log(e.target, e.currentTarget)
       const droppedId = e.dataTransfer.getData('dropped-id')
-      console.log('droppedId ', droppedId)
+      const parentId = e.dataTransfer.getData('parent-id')
+      const newParentId = e.currentTarget.getAttribute('node-id')
+      console.log('droppedId ', droppedId, 'parentId ', parentId, 'newParentId ', newParentId)
+      // this.$store.commit('insertNode', {droppedId: droppedId, parentId: parentId})
     }
   },
   props: ['node', 'nind', 'treeview']

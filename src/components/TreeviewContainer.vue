@@ -21,7 +21,6 @@ export default {
   },
   created: function () {
     const treeview = this.$store.getters.getTree
-    console.log('treeview ', treeview)
     this.treeview = treeview
   }
 }
